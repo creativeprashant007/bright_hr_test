@@ -19,22 +19,16 @@ Installation Steps
 
 Clone the repository:
 
-bash
-Copy
-Edit
+
 git clone https://github.com/yourusername/bright_hr_posts.git
 cd bright_hr_posts
 Install dependencies:
 
-bash
-Copy
-Edit
+
 flutter pub get
 Run the app:
 
-bash
-Copy
-Edit
+
 flutter run
 🏗️ BLoC State Management Overview
 
@@ -46,9 +40,7 @@ Bloc: Processes events and updates state accordingly.
 BlocBuilder: Listens to state changes and rebuilds UI.
 BLoC Example:
 
-dart
-Copy
-Edit
+
 // Event: Fetch posts
 class FetchPostsEvents extends HomeEvents {}
 
