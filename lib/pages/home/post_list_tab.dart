@@ -20,24 +20,29 @@ class PostListTab extends StatelessWidget {
           final posts = state.posts;
           final savedPostIds = state.offlinePosts.map((p) => p.id).toSet();
 
-          return ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (context, index) {
-              final post = posts[index];
-              final isSaved = savedPostIds.contains(post.id);
-
-              return GestureDetector(
-                onTap: () => controller.navigateToDetailsPage(post, false),
-                child: PostTile(
-                  post: post,
-                  isSaved: false,
-                  isSavedAlready: isSaved,
-                  onSave: isSaved ? null : () => controller.savePost(post),
-                  onRemove:
-                      isSaved ? () => controller.removePost(post.id) : null,
-                ),
-              );
+          return RefreshIndicator(
+            onRefresh: () async {
+              await controller.refreshPosts();
             },
+            child: ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                final isSaved = savedPostIds.contains(post.id);
+
+                return GestureDetector(
+                  onTap: () => controller.navigateToDetailsPage(post, false),
+                  child: PostTile(
+                    post: post,
+                    isSaved: false,
+                    isSavedAlready: isSaved,
+                    onSave: isSaved ? null : () => controller.savePost(post),
+                    onRemove:
+                        isSaved ? () => controller.removePost(post.id) : null,
+                  ),
+                );
+              },
+            ),
           );
         } else {
           return const Center(child: Text("No posts available"));

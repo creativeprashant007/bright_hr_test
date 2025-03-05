@@ -45,4 +45,8 @@ class HomePageController {
   void removePost(int postId) {
     context.read<HomeBloc>().add(RemovePostEvents(postId));
   }
+
+  Future<void> refreshPosts() async {
+    context.read<HomeBloc>().add(FetchPostsEvents());
+  }
 }
