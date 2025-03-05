@@ -82,7 +82,7 @@ hive & hive_flutter → Offline storage
 
 flutter_screenutil → Responsive UI
 
-http → API calls
+dio → API calls
 
 🔧 Key Components
 
