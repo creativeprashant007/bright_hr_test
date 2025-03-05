@@ -93,7 +93,7 @@ class HttpUtils {
         options: Options(
           headers: {
             'Content-Type':
-                'application/json; charset=utf-8', // Corrected content type
+                'application/json; charset=utf-8', 
           },
         ),
       );
