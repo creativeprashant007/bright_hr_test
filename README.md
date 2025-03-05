@@ -1,69 +1,54 @@
-Bright HR Posts
-
-Bright HR Posts is a Flutter application that fetches and displays posts from the JSONPlaceholder API. It implements BLoC state management and provides offline storage using Hive. Users can browse posts, save them for offline access, and remove saved posts.
-
 📌 Features
 
-✅ Fetch posts from JSONPlaceholder API✅ BLoC State Management for handling UI state efficiently✅ Offline storage with Hive to save and retrieve posts✅ Tabbed Navigation for switching between posts and saved posts✅ Reusable UI components for consistent design✅ Modular project structure for maintainability
-
-📂 Project Structure
-
-📦 bright_hr_posts
- ┣ 📂 assets         # Static assets (icons, images, etc.)
- ┣ 📂 common
- ┃ ┗ 📂 entities    # Data models (Post entity)
- ┣ 📂 pages
- ┃ ┗ 📂 home
- ┃   ┣ 📂 bloc      # BLoC implementation (state management)
- ┃   ┣ 📂 widgets   # Reusable widgets (PostTile, etc.)
- ┃   ┣ controller.dart  # Business logic controller
- ┃   ┣ home_screen.dart  # Main home page with tabs
- ┃   ┣ post_list_tab.dart  # Tab for fetching posts
- ┃   ┗ offline_post_tab.dart  # Tab for offline (saved) posts
- ┣ 📜 pubspec.yaml  # Dependencies and assets configuration
- ┗ 📜 main.dart     # App entry point
+✅ Fetch posts from JSONPlaceholder API
+✅ BLoC State Management for handling UI state efficiently
+✅ Offline storage with Hive to save and retrieve posts
+✅ Tabbed Navigation for switching between posts and saved posts
+✅ Reusable UI components for consistent design
+✅ Modular project structure for maintainability
 
 🚀 Setup & Installation
 
 Prerequisites
 
 Flutter SDK installed (Download Here)
-
 Dart SDK
-
 Android Studio / VS Code (Recommended)
-
 A device/emulator to run the app
-
 Installation Steps
 
-Clone the repository
+Clone the repository:
 
+bash
+Copy
+Edit
 git clone https://github.com/yourusername/bright_hr_posts.git
 cd bright_hr_posts
+Install dependencies:
 
-Install dependencies
-
+bash
+Copy
+Edit
 flutter pub get
+Run the app:
 
-Run the app
-
+bash
+Copy
+Edit
 flutter run
-
 🏗️ BLoC State Management Overview
 
 The app follows the BLoC (Business Logic Component) pattern to manage state efficiently. It separates UI from business logic, making it scalable and maintainable.
 
 Events: Define user actions (e.g., FetchPostsEvents, SavePostEvents).
-
 States: Define UI states (e.g., PostsLoadingState, PostsLoadedState).
-
 Bloc: Processes events and updates state accordingly.
-
 BlocBuilder: Listens to state changes and rebuilds UI.
-
 BLoC Example:
 
+dart
+Copy
+Edit
 // Event: Fetch posts
 class FetchPostsEvents extends HomeEvents {}
 
@@ -73,35 +58,71 @@ class PostsLoadedState extends HomeStates {
   final List<Post> offlinePosts;
   PostsLoadedState({required this.posts, required this.offlinePosts});
 }
-
 📜 Dependencies Used
 
 flutter_bloc → State management
-
 hive & hive_flutter → Offline storage
-
 flutter_screenutil → Responsive UI
-
 dio → API calls
-
 🔧 Key Components
 
 HomePageController (Centralized Logic)
-
-Manages navigation
-
-Handles saving & removing posts
-
-Updates UI state
+Manages navigation, handles saving & removing posts, and updates UI state.
 
 Reusable PostTile Widget
-
-Used in both Post List and Saved Post tabs
-
-Displays post details with dynamic actions
+Used in both the Post List and Saved Post tabs to display post details with dynamic actions.
 
 Tab Navigation
+Uses TabBarView for Posts and Saved Posts tabs, controlled via TabController.
 
-Uses TabBarView for Posts and Saved Posts tabs
+🧪 Widget Testing
+The app includes widget tests to ensure that the UI behaves as expected. Widget tests help simulate user interactions, validate UI rendering, and ensure smooth navigation.
 
-Controlled via TabController
+Test Functionality:
+Tab Navigation: Test the switching between "Posts" and "Saved Posts" tabs.
+UI Validation: Verify the display of posts and saved posts, and handle empty states.
+Interaction: Simulate taps on tab labels and validate state changes.
+How to Run Widget Tests:
+Create a test file: Widget tests are stored in the test directory of your project. For example, home_page_test.dart.
+
+Write the test: In the test file, you simulate user interactions using the flutter_test package.
+
+Example:
+
+dart
+Copy
+Edit
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:bright_hr_posts/pages/home/homepage.dart'; // Import your widget
+
+void main() {
+  testWidgets('Toggles between tabs on tap', (WidgetTester tester) async {
+    // Build the widget tree
+    await tester.pumpWidget(const MyApp());
+
+    // Ensure initial tab is "Posts"
+    expect(find.text('Posts'), findsOneWidget);
+    expect(find.text('Saved Posts'), findsOneWidget);
+
+    // Tap on "Saved Posts" tab and verify the content
+    await tester.tap(find.text('Saved Posts'));
+    await tester.pumpAndSettle();
+    expect(find.text('No saved posts found'), findsOneWidget);
+
+    // Switch back to "Posts" tab and verify the content
+    await tester.tap(find.text('Posts'));
+    await tester.pumpAndSettle();
+    expect(find.text('Posts'), findsOneWidget);
+  });
+}
+Run the tests:
+
+Run the tests using:
+
+bash
+Copy
+Edit
+flutter test
+This will execute the widget tests and show the results in your terminal.
+

@@ -27,7 +27,7 @@ class PostListTab extends StatelessWidget {
               final isSaved = savedPostIds.contains(post.id);
 
               return GestureDetector(
-                onTap: () => controller.navigateToDetailsPage(post, isSaved),
+                onTap: () => controller.navigateToDetailsPage(post, false),
                 child: PostTile(
                   post: post,
                   isSaved: false,
