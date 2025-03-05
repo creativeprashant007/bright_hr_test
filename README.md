@@ -89,9 +89,6 @@ Write the test: In the test file, you simulate user interactions using the flutt
 
 Example:
 
-dart
-Copy
-Edit
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bright_hr_posts/pages/home/homepage.dart'; // Import your widget
@@ -120,9 +117,7 @@ Run the tests:
 
 Run the tests using:
 
-bash
-Copy
-Edit
+
 flutter test
 This will execute the widget tests and show the results in your terminal.
 
