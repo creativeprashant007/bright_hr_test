@@ -1,11 +1,13 @@
 import 'package:bright_hr_posts/common/routes/app_routes.dart';
 import 'package:bright_hr_posts/common/values/colors.dart';
+import 'package:bright_hr_posts/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+void main() async{
+  await Global.init();
   runApp(const MyApp());
 }
 
