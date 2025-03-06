@@ -22,7 +22,30 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "title": MessageLookupByLibrary.simpleMessage("Flutter Demo"),
-        "welcome_message": MessageLookupByLibrary.simpleMessage("Welcome")
+        "comments": MessageLookupByLibrary.simpleMessage("Comments"),
+        "error_loading_comments":
+            MessageLookupByLibrary.simpleMessage("Failed to load comments."),
+        "error_saving_post":
+            MessageLookupByLibrary.simpleMessage("Failed to save post."),
+        "failed_to_load_post_details": MessageLookupByLibrary.simpleMessage(
+            "Failed to load post details."),
+        "internet_not_available": MessageLookupByLibrary.simpleMessage(
+            "Internet is not available. You can read saved posts only."),
+        "no_post_available":
+            MessageLookupByLibrary.simpleMessage("No posts available."),
+        "post_details": MessageLookupByLibrary.simpleMessage("Post Details"),
+        "post_not_found_in_saved_posts": MessageLookupByLibrary.simpleMessage(
+            "Post not found in saved posts."),
+        "posts": MessageLookupByLibrary.simpleMessage("Posts"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "save_post": MessageLookupByLibrary.simpleMessage("Save Post"),
+        "saved": MessageLookupByLibrary.simpleMessage("Saved"),
+        "saved_posts": MessageLookupByLibrary.simpleMessage("Saved Posts"),
+        "something_went_wrong":
+            MessageLookupByLibrary.simpleMessage("Something went wrong!"),
+        "technical_test": MessageLookupByLibrary.simpleMessage(
+            "Bright Flutter Technical Test"),
+        "title": MessageLookupByLibrary.simpleMessage("Flutter Api"),
+        "view_comments": MessageLookupByLibrary.simpleMessage("View Comments")
       };
 }

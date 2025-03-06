@@ -50,21 +50,171 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Flutter Demo`
+  /// `Flutter Api`
   String get title {
     return Intl.message(
-      'Flutter Demo',
+      'Flutter Api',
       name: 'title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Welcome`
-  String get welcome_message {
+  /// `Bright Flutter Technical Test`
+  String get technical_test {
     return Intl.message(
-      'Welcome',
-      name: 'welcome_message',
+      'Bright Flutter Technical Test',
+      name: 'technical_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Internet is not available. You can read saved posts only.`
+  String get internet_not_available {
+    return Intl.message(
+      'Internet is not available. You can read saved posts only.',
+      name: 'internet_not_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post not found in saved posts.`
+  String get post_not_found_in_saved_posts {
+    return Intl.message(
+      'Post not found in saved posts.',
+      name: 'post_not_found_in_saved_posts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No posts available.`
+  String get no_post_available {
+    return Intl.message(
+      'No posts available.',
+      name: 'no_post_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong!`
+  String get something_went_wrong {
+    return Intl.message(
+      'Something went wrong!',
+      name: 'something_went_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load comments.`
+  String get error_loading_comments {
+    return Intl.message(
+      'Failed to load comments.',
+      name: 'error_loading_comments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to save post.`
+  String get error_saving_post {
+    return Intl.message(
+      'Failed to save post.',
+      name: 'error_saving_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load post details.`
+  String get failed_to_load_post_details {
+    return Intl.message(
+      'Failed to load post details.',
+      name: 'failed_to_load_post_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved`
+  String get saved {
+    return Intl.message(
+      'Saved',
+      name: 'saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Posts`
+  String get posts {
+    return Intl.message(
+      'Posts',
+      name: 'posts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saved Posts`
+  String get saved_posts {
+    return Intl.message(
+      'Saved Posts',
+      name: 'saved_posts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Post`
+  String get save_post {
+    return Intl.message(
+      'Save Post',
+      name: 'save_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post Details`
+  String get post_details {
+    return Intl.message(
+      'Post Details',
+      name: 'post_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Comments`
+  String get view_comments {
+    return Intl.message(
+      'View Comments',
+      name: 'view_comments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message(
+      'Comments',
+      name: 'comments',
       desc: '',
       args: [],
     );

@@ -22,8 +22,32 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "comments": MessageLookupByLibrary.simpleMessage("Comentarios"),
+        "error_loading_comments": MessageLookupByLibrary.simpleMessage(
+            "Error al cargar los comentarios."),
+        "error_saving_post":
+            MessageLookupByLibrary.simpleMessage("Error al guardar el post."),
+        "failed_to_load_post_details": MessageLookupByLibrary.simpleMessage(
+            "Error al cargar los detalles del post."),
+        "internet_not_available": MessageLookupByLibrary.simpleMessage(
+            "No hay internet disponible. Solo puedes leer los posts guardados."),
+        "no_post_available":
+            MessageLookupByLibrary.simpleMessage("No hay posts disponibles."),
+        "post_details":
+            MessageLookupByLibrary.simpleMessage("Detalles del post"),
+        "post_not_found_in_saved_posts": MessageLookupByLibrary.simpleMessage(
+            "No se encontró el post en los posts guardados."),
+        "posts": MessageLookupByLibrary.simpleMessage("Posts"),
+        "save": MessageLookupByLibrary.simpleMessage("Guardar"),
+        "save_post": MessageLookupByLibrary.simpleMessage("Guardar post"),
+        "saved": MessageLookupByLibrary.simpleMessage("Guardado"),
+        "saved_posts": MessageLookupByLibrary.simpleMessage("Posts guardados"),
+        "something_went_wrong":
+            MessageLookupByLibrary.simpleMessage("¡Algo salió mal!"),
+        "technical_test": MessageLookupByLibrary.simpleMessage(
+            "Prueba técnica de Flutter brillante"),
         "title":
             MessageLookupByLibrary.simpleMessage("Demostración de Flutter"),
-        "welcome_message": MessageLookupByLibrary.simpleMessage("Bienvenido")
+        "view_comments": MessageLookupByLibrary.simpleMessage("Ver comentarios")
       };
 }
