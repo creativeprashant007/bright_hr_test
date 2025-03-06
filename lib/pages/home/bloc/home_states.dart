@@ -15,36 +15,50 @@ abstract class HomeStates extends Equatable {
 
 // Initial State
 class HomeInitialState extends HomeStates {
-  const HomeInitialState({required int selectedIndex}) : super(selectedIndex: selectedIndex);
+  const HomeInitialState({required int selectedIndex})
+    : super(selectedIndex: selectedIndex);
 }
 
 // State for Tab Change
 class HomeTabChangedState extends HomeStates {
-  const HomeTabChangedState({required int selectedIndex}) : super(selectedIndex: selectedIndex);
+  const HomeTabChangedState({required int selectedIndex})
+    : super(selectedIndex: selectedIndex);
 }
 
 // Loading State (When fetching posts)
 class PostsLoadingState extends HomeStates {
-  const PostsLoadingState({required int selectedIndex}) : super(selectedIndex: selectedIndex);
+  const PostsLoadingState({required int selectedIndex})
+    : super(selectedIndex: selectedIndex);
 }
 
 // Successfully Loaded Posts
 class PostsLoadedState extends HomeStates {
-  final List<Post> posts;
+  final int selectedIndex;
   final List<Post> offlinePosts; // Include saved posts
+  final List<Post> posts;
+  final bool showOfflineMessage;
 
-  const PostsLoadedState({required int selectedIndex, required this.posts, required this.offlinePosts}) 
-      : super(selectedIndex: selectedIndex);
+  const PostsLoadedState({
+    required this.selectedIndex,
+    required this.posts,
+    required this.offlinePosts,
+    this.showOfflineMessage = false,
+  }) : super(selectedIndex: selectedIndex);
 
   @override
-  List<Object> get props => [selectedIndex, posts, offlinePosts];
+  List<Object> get props => [selectedIndex, posts, offlinePosts,showOfflineMessage];
 
-  @override
-  HomeStates copyWith({int? selectedIndex, List<Post>? posts, List<Post>? offlinePosts}) {
+  PostsLoadedState copyWith({
+    int? selectedIndex,
+    List<Post>? posts,
+    List<Post>? offlinePosts,
+    bool? showOfflineMessage,
+  }) {
     return PostsLoadedState(
       selectedIndex: selectedIndex ?? this.selectedIndex,
       posts: posts ?? this.posts,
       offlinePosts: offlinePosts ?? this.offlinePosts,
+      showOfflineMessage: showOfflineMessage ?? this.showOfflineMessage,
     );
   }
 }
@@ -52,8 +66,8 @@ class PostsLoadedState extends HomeStates {
 // Post Successfully Saved
 class PostSavedState extends HomeStates {
   final List<Post> offlinePosts;
-  const PostSavedState({required int selectedIndex, required this.offlinePosts}) 
-      : super(selectedIndex: selectedIndex);
+  const PostSavedState({required int selectedIndex, required this.offlinePosts})
+    : super(selectedIndex: selectedIndex);
 
   @override
   List<Object> get props => [selectedIndex, offlinePosts];
@@ -62,8 +76,10 @@ class PostSavedState extends HomeStates {
 // Post Successfully Removed
 class PostRemovedState extends HomeStates {
   final List<Post> offlinePosts;
-  const PostRemovedState({required int selectedIndex, required this.offlinePosts}) 
-      : super(selectedIndex: selectedIndex);
+  const PostRemovedState({
+    required int selectedIndex,
+    required this.offlinePosts,
+  }) : super(selectedIndex: selectedIndex);
 
   @override
   List<Object> get props => [selectedIndex, offlinePosts];
@@ -72,8 +88,8 @@ class PostRemovedState extends HomeStates {
 // Error State
 class HomeErrorState extends HomeStates {
   final String message;
-  const HomeErrorState({required int selectedIndex, required this.message}) 
-      : super(selectedIndex: selectedIndex);
+  const HomeErrorState({required int selectedIndex, required this.message})
+    : super(selectedIndex: selectedIndex);
 
   @override
   List<Object> get props => [selectedIndex, message];

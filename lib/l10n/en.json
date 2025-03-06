@@ -1,0 +1,10 @@
+{
+    "app_title": "Flutter API Call",
+    "no_posts_available": "No posts available",
+    "internet_available_msg": "Internet available! Redirecting to saved posts...",
+    "latest_post":"Latest Posts",
+    "post_details":"Post Details",
+    "post_saved":"Post Saved",
+    "save_post":"Save Post",
+    "":""
+  }

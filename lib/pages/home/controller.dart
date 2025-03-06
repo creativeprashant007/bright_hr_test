@@ -15,9 +15,11 @@ class HomePageController {
   }
 
   void _initialize() {
-    // Fetch posts and load offline posts
-    context.read<HomeBloc>().add(FetchPostsEvents());
+    // Load offline posts first
     context.read<HomeBloc>().add(LoadOfflinePostsEvents());
+
+    // Then fetch from API
+    context.read<HomeBloc>().add(FetchPostsEvents());
 
     // Listen for tab changes
     tabController.addListener(() {

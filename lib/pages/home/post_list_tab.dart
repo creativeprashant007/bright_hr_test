@@ -24,24 +24,53 @@ class PostListTab extends StatelessWidget {
             onRefresh: () async {
               await controller.refreshPosts();
             },
-            child: ListView.builder(
-              itemCount: posts.length,
-              itemBuilder: (context, index) {
-                final post = posts[index];
-                final isSaved = savedPostIds.contains(post.id);
+            child: Column(
+              children: [
+                if (state.showOfflineMessage) // Show message if no internet
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.red.shade100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                return GestureDetector(
-                  onTap: () => controller.navigateToDetailsPage(post, false),
-                  child: PostTile(
-                    post: post,
-                    isSaved: false,
-                    isSavedAlready: isSaved,
-                    onSave: isSaved ? null : () => controller.savePost(post),
-                    onRemove:
-                        isSaved ? () => controller.removePost(post.id) : null,
+                      children: const [
+                        Icon(Icons.warning, color: Colors.red),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            "Internet is not available. You can read saved posts only.",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: posts.length,
+                    itemBuilder: (context, index) {
+                      final post = posts[index];
+                      final isSaved = savedPostIds.contains(post.id);
+
+                      return GestureDetector(
+                        onTap:
+                            () => controller.navigateToDetailsPage(post, false),
+                        child: PostTile(
+                          post: post,
+                          isSaved: false,
+                          isSavedAlready: isSaved,
+                          onSave:
+                              isSaved ? null : () => controller.savePost(post),
+                          onRemove:
+                              isSaved
+                                  ? () => controller.removePost(post.id)
+                                  : null,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         } else {
