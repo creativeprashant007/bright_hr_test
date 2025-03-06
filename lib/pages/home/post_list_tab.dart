@@ -1,3 +1,4 @@
+import 'package:bright_hr_posts/l10n/app_localizations.dart';
 import 'package:bright_hr_posts/pages/home/controller.dart';
 import 'package:bright_hr_posts/pages/home/widgets/post_tile.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +34,13 @@ class PostListTab extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
 
-                      children: const [
-                        Icon(Icons.warning, color: Colors.red),
-                        SizedBox(width: 8),
+                      children: [
+                        const Icon(Icons.warning, color: Colors.red),
+                        const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            "Internet is not available. You can read saved posts only.",
-                            style: TextStyle(color: Colors.red),
+                            AppLocalizations.of(context)!.internetNotAvailable,
+                            style: const TextStyle(color: Colors.red),
                           ),
                         ),
                       ],
@@ -74,7 +75,9 @@ class PostListTab extends StatelessWidget {
             ),
           );
         } else {
-          return const Center(child: Text("No posts available"));
+          return Center(
+            child: Text(AppLocalizations.of(context)!.noPostAvailable),
+          );
         }
       },
     );

@@ -1,0 +1,19 @@
+{
+  "title": "Demostración de Flutter",
+  "technical_test": "Prueba técnica de Flutter brillante",
+  "internet_not_available": "No hay internet disponible. Solo puedes leer los posts guardados.",
+  "post_not_found_in_saved_posts": "No se encontró el post en los posts guardados.",
+  "no_post_available": "No hay posts disponibles.",
+  "something_went_wrong": "¡Algo salió mal!",
+  "error_loading_comments": "Error al cargar los comentarios.",
+  "error_saving_post": "Error al guardar el post.",
+  "failed_to_load_post_details": "Error al cargar los detalles del post.",
+  "saved": "Guardado",
+  "save": "Guardar",
+  "posts": "Posts",
+  "saved_posts": "Posts guardados",
+  "save_post": "Guardar post",
+  "post_details": "Detalles del post",
+  "view_comments": "Ver comentarios",
+  "comments": "Comentarios"
+}

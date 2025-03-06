@@ -1,3 +1,5 @@
+import 'package:bright_hr_posts/common/values/colors.dart';
+import 'package:bright_hr_posts/l10n/app_localizations.dart';
 import 'package:bright_hr_posts/pages/post_comments/post_comments_page.dart';
 import 'package:bright_hr_posts/pages/post_details/bloc/post_details_bloc.dart';
 import 'package:bright_hr_posts/pages/post_details/bloc/post_details_states.dart';
@@ -25,7 +27,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Post Details")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.postDetails)),
       body: BlocBuilder<PostDetailsBloc, PostDetailsState>(
         builder: (context, state) {
           if (state is PostDetailsLoading) {
@@ -42,11 +44,18 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                     post.title,
                     style: const TextStyle(
                       fontSize: 22,
+                      color: AppColors.primaryText,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(post.body, style: const TextStyle(fontSize: 18)),
+                  Text(
+                    post.body,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: AppColors.primarySecondaryElementText,
+                    ),
+                  ),
                   const SizedBox(height: 20),
 
                   // Save button with dynamic styling
@@ -56,15 +65,20 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           state.isSaved
-                              ? Colors.grey
-                              : Colors
-                                  .blue, // Blue when not saved, grey when saved
+                              ? AppColors.primarySecondaryElementText
+                              : AppColors
+                                  .primaryElement, // Blue when not saved, grey when saved
                       foregroundColor:
                           state.isSaved
-                              ? Colors.black
-                              : Colors.white, // White text when not saved
+                              ? AppColors.primaryText
+                              : AppColors
+                                  .primaryElementText, // White text when not saved
                     ),
-                    child: Text(state.isSaved ? "Post Saved" : "Save Post"),
+                    child: Text(
+                      state.isSaved
+                          ? AppLocalizations.of(context)!.savedPosts
+                          : AppLocalizations.of(context)!.savePosts,
+                    ),
                   ),
 
                   const SizedBox(height: 20),
@@ -81,7 +95,7 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
                           ),
                         );
                       },
-                      child: const Text("View Comments"),
+                      child: Text(AppLocalizations.of(context)!.viewComments),
                     ),
                 ],
               ),
@@ -90,11 +104,13 @@ class _PostDetailsScreenState extends State<PostDetailsScreen> {
             return Center(
               child: Text(
                 state.message,
-                style: const TextStyle(color: Colors.red),
+                style: const TextStyle(color: AppColors.primaryElementBg),
               ),
             );
           } else {
-            return const Center(child: Text("Something went wrong!"));
+            return Center(
+              child: Text(AppLocalizations.of(context)!.somethingWentWrong),
+            );
           }
         },
       ),

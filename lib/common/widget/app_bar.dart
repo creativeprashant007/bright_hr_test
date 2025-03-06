@@ -1,3 +1,4 @@
+import 'package:bright_hr_posts/common/values/asset_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,11 +13,11 @@ AppBar buildAppBar(String title, {PreferredSizeWidget? bottom}) {
           SizedBox(
             width: 18.w,
             height: 18.h,
-            child: Image.asset("assets/icons/menu.png"),
+            child: Image.asset(AssetStrings.menu),
           ),
           SizedBox(width: 30.w),
           Text(
-            "Latest Posts",
+            title,
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
           ),
         ],

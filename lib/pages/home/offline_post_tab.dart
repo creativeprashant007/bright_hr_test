@@ -1,4 +1,5 @@
 import 'package:bright_hr_posts/common/entities/post.dart';
+import 'package:bright_hr_posts/l10n/app_localizations.dart';
 import 'package:bright_hr_posts/pages/home/controller.dart';
 import 'package:bright_hr_posts/pages/home/widgets/post_tile.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,9 @@ class SavedPostsTab extends StatelessWidget {
             },
           );
         } else {
-          return const Center(child: Text("No saved posts found"));
+          return Center(
+            child: Text(AppLocalizations.of(context)!.noPostAvailable),
+          );
         }
       },
     );

@@ -1,0 +1,19 @@
+{
+  "title": "Flutter Api",
+  "technical_test": "Bright Flutter Technical Test",
+  "internet_not_available": "Internet is not available. You can read saved posts only.",
+  "post_not_found_in_saved_posts": "Post not found in saved posts.",
+  "no_post_available": "No posts available.",
+  "something_went_wrong": "Something went wrong!",
+  "error_loading_comments": "Failed to load comments.",
+  "error_saving_post": "Failed to save post.",
+  "failed_to_load_post_details": "Failed to load post details.",
+  "saved": "Saved",
+  "save": "Save",
+  "posts": "Posts",
+  "saved_posts": "Saved Posts",
+  "save_post": "Save Post",
+  "post_details": "Post Details",
+  "view_comments": "View Comments",
+  "comments": "Comments"
+}

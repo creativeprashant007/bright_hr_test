@@ -10,6 +10,8 @@ class PostDetailsBloc extends Bloc<PostDetailsEvent, PostDetailsState> {
   final PostApi postApi = PostApi();
 
   PostDetailsBloc() : super(PostDetailsInitial()) {
+    
+    // Fetch post details
     on<FetchPostDetailsEvent>((event, emit) async {
       emit(PostDetailsLoading());
       try {
@@ -21,10 +23,11 @@ class PostDetailsBloc extends Bloc<PostDetailsEvent, PostDetailsState> {
 
         emit(PostDetailsLoaded(post: post, comments: comments, isSaved: isSaved));
       } catch (e) {
-        emit(PostDetailsError(message: "Failed to load post details: ${e.toString()}"));
+        emit(PostDetailsError(message: 'something_went_wrong'));
       }
     });
 
+    // Fetch saved post details from Hive
     on<FetchSavedPostDetailsEvent>((event, emit) async {
       emit(PostDetailsLoading());
       try {
@@ -34,13 +37,14 @@ class PostDetailsBloc extends Bloc<PostDetailsEvent, PostDetailsState> {
         if (savedPost != null) {
           emit(PostDetailsLoaded(post: savedPost, comments: [], isSaved: true));
         } else {
-          emit(PostDetailsError(message: "Post not found in saved posts"));
+          emit(PostDetailsError(message: 'post_not_found_in_saved_posts'));
         }
       } catch (e) {
-        emit(PostDetailsError(message: "Failed to load saved post: ${e.toString()}"));
+        emit(PostDetailsError(message: 'something_went_wrong'));
       }
     });
 
+    // Save post to Hive
     on<SavePostEvent>((event, emit) async {
       try {
         final box = await Hive.openBox<Post>(AppConstants.SAVE_POST_HIVE_KEY);
@@ -48,7 +52,7 @@ class PostDetailsBloc extends Bloc<PostDetailsEvent, PostDetailsState> {
 
         emit(PostDetailsLoaded(post: event.post, comments: [], isSaved: true));
       } catch (e) {
-        emit(PostDetailsError(message: "Failed to save post: ${e.toString()}"));
+        emit(PostDetailsError(message: 'something_went_wrong'));
       }
     });
   }

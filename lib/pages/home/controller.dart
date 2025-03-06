@@ -1,5 +1,6 @@
 import 'package:bright_hr_posts/common/routes/route_names.dart';
 import 'package:bright_hr_posts/common/entities/post.dart';
+import 'package:bright_hr_posts/common/values/constants.dart';
 import 'package:bright_hr_posts/pages/home/bloc/home_bloc.dart';
 import 'package:bright_hr_posts/pages/home/bloc/home_events.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePageController {
   final BuildContext context;
   late TabController tabController;
+  
 
   HomePageController({required this.context, required TickerProvider vsync}) {
     tabController = TabController(length: 2, vsync: vsync);
@@ -15,6 +17,7 @@ class HomePageController {
   }
 
   void _initialize() {
+    
     // Load offline posts first
     context.read<HomeBloc>().add(LoadOfflinePostsEvents());
 
@@ -33,7 +36,10 @@ class HomePageController {
     await Navigator.pushNamed(
       context,
       RouteNames.POST_DETAILS_PAGE,
-      arguments: {'post_id': post.id, 'is_saved': isSaved},
+      arguments: {
+        AppConstants.POST_ID: post.id,
+        AppConstants.IS_SAVED: isSaved,
+      },
     );
 
     // Reload saved posts after returning

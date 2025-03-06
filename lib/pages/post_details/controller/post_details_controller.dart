@@ -16,8 +16,8 @@ class PostDetailsController {
   void initializeArguments() {
     final args = ModalRoute.of(context)?.settings.arguments;
     if (args is Map<String, dynamic>) {
-      postId = args['post_id'] as int? ?? -1;
-      isSavedPost = args['is_saved'] as bool? ?? false;
+      postId = args[AppConstants.POST_ID] as int? ?? -1;
+      isSavedPost = args[AppConstants.IS_SAVED] as bool? ?? false;
     } else {
       postId = -1;
       isSavedPost = false;
@@ -32,7 +32,9 @@ class PostDetailsController {
     if (isSaved) {
       final post = box.get(postId);
       if (post != null) {
-        context.read<PostDetailsBloc>().add(FetchSavedPostDetailsEvent(postId, post));
+        context.read<PostDetailsBloc>().add(
+          FetchSavedPostDetailsEvent(postId, post),
+        );
       }
     } else {
       context.read<PostDetailsBloc>().add(FetchPostDetailsEvent(postId));

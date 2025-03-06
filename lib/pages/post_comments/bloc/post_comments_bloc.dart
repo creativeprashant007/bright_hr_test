@@ -1,4 +1,3 @@
-
 import 'package:bright_hr_posts/common/utils/api/post/post_api.dart';
 import 'package:bright_hr_posts/pages/post_comments/bloc/fetch_comments_events.dart';
 import 'package:bright_hr_posts/pages/post_comments/bloc/post_comments_states.dart';
@@ -14,7 +13,7 @@ class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
         final comments = await _repository.fetchCommentsByPostId(event.postId);
         emit(CommentsLoaded(comments));
       } catch (e) {
-        emit(CommentsError("Failed to load comments"));
+        emit(CommentsError("error_loading_comments"));
       }
     });
   }

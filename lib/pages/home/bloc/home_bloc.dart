@@ -1,5 +1,6 @@
 import 'package:bright_hr_posts/common/utils/api/post/post_api.dart';
 import 'package:bright_hr_posts/common/utils/hive/hive_services.dart';
+import 'package:bright_hr_posts/l10n/app_localizations.dart';
 import 'package:bright_hr_posts/pages/home/bloc/home_events.dart';
 import 'package:bright_hr_posts/pages/home/bloc/home_states.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -10,8 +11,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   final HiveService hiveService;
 
   HomeBloc({required this.postRepository, required this.hiveService})
-      : super(const HomeInitialState(selectedIndex: 0)) {
-    
+    : super(const HomeInitialState(selectedIndex: 0)) {
     // Handling tab change
     on<HomeTabChangedEvents>((event, emit) {
       emit(state.copyWith(selectedIndex: event.tabIndex));
@@ -20,11 +20,16 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     // Load offline posts from Hive
     on<LoadOfflinePostsEvents>((event, emit) async {
       final offlinePosts = await hiveService.getSavedPosts();
-      emit(PostsLoadedState(
-        selectedIndex: state.selectedIndex,
-        posts: state is PostsLoadedState ? (state as PostsLoadedState).posts : [],
-        offlinePosts: offlinePosts,
-      ));
+      emit(
+        PostsLoadedState(
+          selectedIndex: state.selectedIndex,
+          posts:
+              state is PostsLoadedState
+                  ? (state as PostsLoadedState).posts
+                  : [],
+          offlinePosts: offlinePosts,
+        ),
+      );
     });
 
     // Fetch posts with internet check
@@ -38,32 +43,38 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
       if (!hasInternet) {
         // Load only offline posts if no internet
         final offlinePosts = await hiveService.getSavedPosts();
-        emit(PostsLoadedState(
-          selectedIndex: state.selectedIndex,
-          posts: [],
-          offlinePosts: offlinePosts,
-          showOfflineMessage: true, // Indicate internet is unavailable
-        ));
+        emit(
+          PostsLoadedState(
+            selectedIndex: state.selectedIndex,
+            posts: [],
+            offlinePosts: offlinePosts,
+            showOfflineMessage: true, // Indicate internet is unavailable
+          ),
+        );
         return;
       }
 
       try {
         final posts = await postRepository.fetchPosts();
         final offlinePosts = await hiveService.getSavedPosts();
-        emit(PostsLoadedState(
-          selectedIndex: state.selectedIndex,
-          posts: posts,
-          offlinePosts: offlinePosts,
-          showOfflineMessage: false,
-        ));
+        emit(
+          PostsLoadedState(
+            selectedIndex: state.selectedIndex,
+            posts: posts,
+            offlinePosts: offlinePosts,
+            showOfflineMessage: false,
+          ),
+        );
       } catch (e) {
         final offlinePosts = await hiveService.getSavedPosts();
-        emit(PostsLoadedState(
-          selectedIndex: state.selectedIndex,
-          posts: [],
-          offlinePosts: offlinePosts,
-          showOfflineMessage: true, // Show message in case of error
-        ));
+        emit(
+          PostsLoadedState(
+            selectedIndex: state.selectedIndex,
+            posts: [],
+            offlinePosts: offlinePosts,
+            showOfflineMessage: true, // Show message in case of error
+          ),
+        );
       }
     });
 
@@ -75,19 +86,26 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
 
         // After saving, fetch updated offline posts
         final offlinePosts = await hiveService.getSavedPosts();
-        
+
         // Update the UI with the saved post
-        emit(PostsLoadedState(
-          selectedIndex: state.selectedIndex,
-          posts: state is PostsLoadedState ? (state as PostsLoadedState).posts : [],
-          offlinePosts: offlinePosts,
-          showOfflineMessage: false, // No offline message after saving
-        ));
+        emit(
+          PostsLoadedState(
+            selectedIndex: state.selectedIndex,
+            posts:
+                state is PostsLoadedState
+                    ? (state as PostsLoadedState).posts
+                    : [],
+            offlinePosts: offlinePosts,
+            showOfflineMessage: false, // No offline message after saving
+          ),
+        );
       } catch (e) {
-        emit(HomeErrorState(
-          selectedIndex: state.selectedIndex,
-          message: 'Error saving post: $e',
-        ));
+        emit(
+          HomeErrorState(
+            selectedIndex: state.selectedIndex,
+            message: 'something_went_wrong',
+          ),
+        );
       }
     });
   }

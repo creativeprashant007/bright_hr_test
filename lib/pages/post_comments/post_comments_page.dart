@@ -1,4 +1,5 @@
-
+import 'package:bright_hr_posts/common/values/colors.dart';
+import 'package:bright_hr_posts/l10n/app_localizations.dart';
 import 'package:bright_hr_posts/pages/post_comments/bloc/fetch_comments_events.dart';
 import 'package:bright_hr_posts/pages/post_comments/bloc/post_comments_bloc.dart';
 import 'package:bright_hr_posts/pages/post_comments/bloc/post_comments_states.dart';
@@ -13,7 +14,7 @@ class CommentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Comments")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.comments)),
       body: BlocProvider(
         create: (context) => CommentsBloc()..add(FetchCommentsEvent(postId)),
         child: BlocBuilder<CommentsBloc, CommentsState>(
@@ -30,9 +31,17 @@ class CommentsScreen extends StatelessWidget {
                     child: ListTile(
                       title: Text(
                         comment.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primaryText,
+                        ),
                       ),
-                      subtitle: Text(comment.body),
+                      subtitle: Text(
+                        comment.body,
+                        style: TextStyle(
+                          color: AppColors.primarySecondaryElementText,
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -40,12 +49,16 @@ class CommentsScreen extends StatelessWidget {
             } else if (state is CommentsError) {
               return Center(
                 child: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.red),
+                  AppLocalizations.of(
+                    context,
+                  )!.somethingWentWrong, // Localized error message
+                  style: const TextStyle(color: AppColors.primaryElementBg),
                 ),
               );
             } else {
-              return const Center(child: Text("Something went wrong!"));
+              return Center(
+                child: Text(AppLocalizations.of(context)!.somethingWentWrong),
+              );
             }
           },
         ),

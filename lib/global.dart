@@ -2,6 +2,8 @@ import 'package:bright_hr_posts/common/entities/post.dart';
 import 'package:bright_hr_posts/common/values/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+
 
 class Global {
   static Future init() async {
@@ -17,5 +19,6 @@ class Global {
 
     // Open a Hive Box (this can also be handled in HiveService)
     await Hive.openBox<Post>(AppConstants.SAVE_POST_HIVE_KEY);
+    await FlutterLocalization.instance.ensureInitialized();
   }
 }
