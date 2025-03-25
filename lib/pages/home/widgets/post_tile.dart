@@ -45,7 +45,7 @@ class PostTile extends StatelessWidget {
       child: Text(
         isSavedAlready
             ? AppLocalizations.of(context)!.saved
-            : AppLocalizations.of(context)!.saved,
+            : AppLocalizations.of(context)!.save,
       ),
     );
   }

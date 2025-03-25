@@ -91,15 +91,14 @@ class HttpUtils {
         path,
         queryParameters: queryParameters,
         options: Options(
-          headers: {
-            'Content-Type':
-                'application/json; charset=utf-8', 
-          },
+          headers: {'Content-Type': 'application/json; charset=utf-8'},
         ),
       );
 
       // Check if the response is successful
+      print("Here is response $response");
       if (response.statusCode == 200) {
+        print("here we are now");
         return response;
       } else {
         print('Error: Received status code ${response.statusCode}');

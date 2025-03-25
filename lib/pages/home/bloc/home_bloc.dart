@@ -1,6 +1,5 @@
 import 'package:bright_hr_posts/common/utils/api/post/post_api.dart';
 import 'package:bright_hr_posts/common/utils/hive/hive_services.dart';
-import 'package:bright_hr_posts/l10n/app_localizations.dart';
 import 'package:bright_hr_posts/pages/home/bloc/home_events.dart';
 import 'package:bright_hr_posts/pages/home/bloc/home_states.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -36,19 +35,17 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     on<FetchPostsEvents>((event, emit) async {
       emit(PostsLoadingState(selectedIndex: state.selectedIndex));
 
-      // Check internet availability
       var connectivityResult = await Connectivity().checkConnectivity();
       bool hasInternet = connectivityResult != ConnectivityResult.none;
 
       if (!hasInternet) {
-        // Load only offline posts if no internet
         final offlinePosts = await hiveService.getSavedPosts();
         emit(
           PostsLoadedState(
             selectedIndex: state.selectedIndex,
             posts: [],
             offlinePosts: offlinePosts,
-            showOfflineMessage: true, // Indicate internet is unavailable
+            showOfflineMessage: true,
           ),
         );
         return;
@@ -72,7 +69,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
             selectedIndex: state.selectedIndex,
             posts: [],
             offlinePosts: offlinePosts,
-            showOfflineMessage: true, // Show message in case of error
+            showOfflineMessage: true,
           ),
         );
       }
@@ -81,13 +78,8 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     // Handle saving a post to Hive
     on<SavePostEvents>((event, emit) async {
       try {
-        // Save post to Hive (or your local database)
         await hiveService.savePost(event.post);
-
-        // After saving, fetch updated offline posts
         final offlinePosts = await hiveService.getSavedPosts();
-
-        // Update the UI with the saved post
         emit(
           PostsLoadedState(
             selectedIndex: state.selectedIndex,
@@ -96,7 +88,33 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
                     ? (state as PostsLoadedState).posts
                     : [],
             offlinePosts: offlinePosts,
-            showOfflineMessage: false, // No offline message after saving
+            showOfflineMessage: false,
+          ),
+        );
+      } catch (e) {
+        emit(
+          HomeErrorState(
+            selectedIndex: state.selectedIndex,
+            message: 'something_went_wrong',
+          ),
+        );
+      }
+    });
+
+    // Handle removing a post from Hive
+    on<RemovePostEvents>((event, emit) async {
+      try {
+        await hiveService.removePost(event.postId);
+        final offlinePosts = await hiveService.getSavedPosts();
+        emit(
+          PostsLoadedState(
+            selectedIndex: state.selectedIndex,
+            posts:
+                state is PostsLoadedState
+                    ? (state as PostsLoadedState).posts
+                    : [],
+            offlinePosts: offlinePosts,
+            showOfflineMessage: false,
           ),
         );
       } catch (e) {
